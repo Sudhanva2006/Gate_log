@@ -8,49 +8,59 @@ public class StudentExit {
     private int year;
     private String reason;
     private String approvedBy;
-    private boolean approved;
 
-    public StudentExit(String usn, String studentName, String department, int year, String reason) {
+    // Constructor used by Faculty UI
+    public StudentExit(String usn, String studentName, String department,
+                       int year, String reason, String approvedBy) {
         this.usn = usn;
         this.studentName = studentName;
         this.department = department;
         this.year = year;
         this.reason = reason;
-        this.approved = false;
+        this.approvedBy = approvedBy;
     }
 
-    public void approveExit(String facultyName) {
-        this.approvedBy = facultyName;
-        this.approved = true;
+    // Constructor used when loading from DB
+    public StudentExit(String usn, String studentName, String department,
+                       int year, String reason, String approvedBy, boolean dummy) {
+        this(usn, studentName, department, year, reason, approvedBy);
     }
 
-    public void displayExitStatus() {
-        System.out.println(usn + " | " + studentName + " | " + department + " | Year " + year);
-        System.out.println("Reason: " + reason);
-        System.out.println("Status: " + (approved ? "APPROVED by " + approvedBy : "PENDING"));
-    }
-
-    public boolean isApproved() {
-        return approved;
-    }
+    // ===== GETTERS (ALL POSSIBLE NAMES) =====
 
     public String getUsn() {
         return usn;
     }
-public String getStudentName() {
-    return studentName;
-}
 
-public String getDepartment() {
-    return department;
-}
+    // Used by AdminUI
+    public String getName() {
+        return studentName;
+    }
 
-public int getYear() {
-    return year;
-}
+    // Used by DAO
+    public String getStudentName() {
+        return studentName;
+    }
 
-public String getReason() {
-    return reason;
-}
+    // Used by AdminUI & DAO
+    public String getDepartment() {
+        return department;
+    }
 
+    // Alias safety
+    public String getDept() {
+        return department;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getApprovedBy() {
+        return approvedBy;
+    }
 }
